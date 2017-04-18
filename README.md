@@ -1,0 +1,1 @@
+# MySQL-structure-updater
