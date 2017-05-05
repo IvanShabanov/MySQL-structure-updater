@@ -80,7 +80,9 @@ function getQueries( $sql ) {
               $fields = preg_replace("/DEFAULT \'([^\']*),([^\']*)\'/s", "DEFAULT '$1[zapataya]$2'", $fields);
             }
             /*Разобьем на добавляемые поля */
-            if (preg_match_all("/(`([\S^`]+)` (\w+)\(? ?(\d*) ?\)? ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
+//            if (preg_match_all("/(`([\S^`]+)` (\w+)\(? ?(\d*) ?\)? ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
+            if (preg_match_all("/(`([\S^`]+)` ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
+
               foreach ($__matches as $key=>$val) {
                 /*Если меняли запятые, то высмтавим их обратно */
                 $__matches[$key] = str_replace('[zapataya]' , ',', $val);
@@ -111,7 +113,8 @@ function getQueries( $sql ) {
         $fields = preg_replace("/DEFAULT \'([^\']*),([^\']*)\'/s", "DEFAULT '$1[zapataya]$2'", $fields);
       }
       /*Разобьем на добавляемые поля */
-      if (preg_match_all("/(`([\S^`]+)` (\w+)\(? ?(\d*) ?\)? ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
+//      if (preg_match_all("/(`([\S^`]+)` (\w+)\(? ?(\d*) ?\)? ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
+      if (preg_match_all("/(`([\S^`]+)` ([^,]*)),?/", $fields, $__matches, PREG_SET_ORDER)) {
         foreach ($__matches as $key=>$val) {
           /*Если меняли запятые, то высмтавим их обратно */
           $__matches[$key] = str_replace('[zapataya]' , ',', $val);
