@@ -159,6 +159,7 @@ function connect_to_db($dbhost, $dbuser, $dbpass, $dbname) {
   global $mysqli;
   $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($mysqli->connect_errno) {
+    echo '<p>ERROR when connection to MySQL BD</p>'
     die ();
   }
 }
