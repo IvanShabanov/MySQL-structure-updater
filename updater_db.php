@@ -172,6 +172,7 @@ function mysqli_db() {
 /**********************************************/
 function UpdateDB ($CurSql, $dbhost, $dbuser, $dbpass, $dbname) {
   connect_to_db($dbhost, $dbuser, $dbpass, $dbname);
+  echo '<p>Connected</p>';
   $resurs = getQueries( $CurSql );
   if (is_array($resurs['QUERIES'] )) {
     foreach ($resurs['QUERIES'] as $query){
@@ -217,16 +218,24 @@ function ShowForm() {
 }
 
 function ActionForm() {
-  $uploadfile = tempnam("", "updater_sql");  
+  $uploadfile = tempnam("", "updater_sql".rand(100,999));  
   if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+     echo '<p>Uploaded file</p>';
+    
      $CurSql = file_get_contents($uploadfile);
+
+     echo '<p>Content loaded</p>';
+
      $dbhost = $_POST['host'];
      $dbuser = $_POST['user'];
      $dbpass = $_POST['pass'];
      $dbname = $_POST['base'];
      UpdateDB ($CurSql, $dbhost, $dbuser, $dbpass, $dbname);
+  } else {
+     echo '<p>ERROR TO UPLOAD FILE</p>';
   }
 }
+
 if ($_GET['do']== '') {
   ShowForm();
 } else {
